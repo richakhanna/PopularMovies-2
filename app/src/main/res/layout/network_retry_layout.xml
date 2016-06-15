@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/network_retry_full_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/margin_large"
+        android:paddingLeft="@dimen/margin_large"
+        android:paddingRight="@dimen/margin_large"
+        android:text="@string/internet_con"
+        android:textSize="@dimen/medium" />
+
+
+    <Button
+        android:id="@+id/button_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/margin_large"
+        android:paddingLeft="@dimen/margin_xxlarge"
+        android:paddingRight="@dimen/margin_xxlarge"
+        android:paddingTop="@dimen/margin_large"
+        android:text="@string/retry"
+        android:textAllCaps="false"
+        android:textSize="@dimen/medium" />
+
+</LinearLayout>

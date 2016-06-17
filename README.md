@@ -13,6 +13,10 @@ In Stage 2 of Popular Movies, additional features has been implemented to enhanc
 - Also, app experience has been optimized for tablet. Tablet UI uses a Master-Detail layout implemented using fragments.
   The left fragment is for discovering movies. The right fragment displays the movie details view for the currently selected movie.
 
+
+[![Screen Record on youtube](http://img.youtube.com/vi/ZfBGA5Bkv70/0.jpg)](https://www.youtube.com/watch?v=ZfBGA5Bkv70)
+
+
 Tablet UI using Master-Detail Layout
 ![tablet_ui_master_detail](https://udacity-github-sync-content.s3.amazonaws.com/_imgs/7402/1466036925/Screenshot_20160615-201656.png)
 

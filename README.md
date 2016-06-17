@@ -18,5 +18,8 @@ Tablet UI using Master-Detail Layout
 
 Favorite Movies from Local Database
 ![favorite_movies_from_database](https://udacity-github-sync-content.s3.amazonaws.com/_imgs/7402/1466036925/Screenshot_20160615-201755.png)
+
+
+Important Note : Please add the API_KEY in DataManager class inside network package before running the app.
   
   

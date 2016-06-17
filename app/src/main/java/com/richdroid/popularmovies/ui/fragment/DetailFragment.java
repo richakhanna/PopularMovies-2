@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.graphics.Palette;
@@ -66,8 +67,9 @@ import static com.richdroid.popularmovies.utils.Constants.ARG_MOVIE_DETAIL;
 public class DetailFragment extends Fragment implements View.OnClickListener, DBUpdateListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    public static final String SAVE_ALL_MOVIE_REVIEWS_LIST = "ALL_MOVIE_REVIEWS_LIST";
 
+    @BindView(R.id.coordinate_layout)
+    CoordinatorLayout mCoordinatorLayout;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout mCollapsingToolBar;
     @BindView(R.id.iv_backdrop)
@@ -142,16 +144,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
         mDataMan = app.getDataManager();
         mSPManagerFavMovies = SPManagerFavMovies.getInstance(mActivity);
 
-        if (NetworkUtils.isOnline(mActivity)) {
-            mProgressBar.show();
-            Log.v(TAG, "Calling : get movie reviews api");
-            mDataMan.getMovieReviews(
-                    new WeakReference<DataRequester>(mMovieReviewRequester), mMovie.getId(),
-                    Language.LANGUAGE_EN.getValue(), TAG);
-
-        } else {
-            NetworkUtils.showSnackbar(mCollapsingToolBar, noInternetConnectionToShowReviews);
-        }
     }
 
     @Override
@@ -246,6 +238,25 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //If your Fragment is added to existing activity
+        //you should call the SnackBar's method into the onActivityCreated()
+        // method of the Fragment.
+        if (NetworkUtils.isOnline(mActivity)) {
+            mProgressBar.show();
+            Log.v(TAG, "Calling : get movie reviews api");
+            mDataMan.getMovieReviews(
+                    new WeakReference<DataRequester>(mMovieReviewRequester), mMovie.getId(),
+                    Language.LANGUAGE_EN.getValue(), TAG);
+
+        } else {
+            NetworkUtils.showSnackbar(mCoordinatorLayout, noInternetConnectionToShowReviews);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_favorite:
@@ -265,7 +276,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
                             Language.LANGUAGE_EN.getValue(), TAG);
 
                 } else {
-                    NetworkUtils.showSnackbar(mCollapsingToolBar, noInternetConnection);
+                    NetworkUtils.showSnackbar(mCoordinatorLayout, noInternetConnection);
                 }
 
                 break;
@@ -280,7 +291,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
                             Language.LANGUAGE_EN.getValue(), TAG);
 
                 } else {
-                    NetworkUtils.showSnackbar(mCollapsingToolBar, noInternetConnection);
+                    NetworkUtils.showSnackbar(mCoordinatorLayout, noInternetConnection);
                 }
                 break;
 
@@ -303,14 +314,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
                     mSPManagerFavMovies.putBoolean(mMovie.getId(), false);
                 }
 
-                NetworkUtils.showSnackbar(mCollapsingToolBar, mMovie.getTitle() + " " + operation);
+                NetworkUtils.showSnackbar(mCoordinatorLayout, mMovie.getTitle() + " " + operation);
             }
         });
     }
 
     @Override
     public void onFailure() {
-        NetworkUtils.showSnackbar(mCollapsingToolBar, mMovie.getTitle() + " " + somethingWentWrong);
+        NetworkUtils.showSnackbar(mCoordinatorLayout, mMovie.getTitle() + " " + somethingWentWrong);
     }
 
 
@@ -324,7 +335,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
 
             mProgressBar.hide();
             Log.v(TAG, "Failure : video trailer onFailure");
-            NetworkUtils.showSnackbar(mCollapsingToolBar, noInternetConnection);
+            NetworkUtils.showSnackbar(mCoordinatorLayout, noInternetConnection);
         }
 
         @Override
@@ -417,7 +428,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener, DB
 
             mProgressBar.hide();
             Log.v(TAG, "Failure : movie Reviews onFailure");
-            NetworkUtils.showSnackbar(mCollapsingToolBar, noInternetConnectionToShowReviews);
+            NetworkUtils.showSnackbar(mCoordinatorLayout, noInternetConnectionToShowReviews);
         }
 
         @Override

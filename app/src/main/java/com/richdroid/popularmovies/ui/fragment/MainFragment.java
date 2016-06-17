@@ -303,6 +303,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             mDatasetList.clear();
             mAdapter.notifyDataSetChanged();
             NetworkUtils.showSnackbar(mRecyclerView, mUnableToReachServer);
+            mNoNetworkRetryLayout.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -312,6 +313,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             }
 
             mProgressBar.hide();
+            if (mNoNetworkRetryLayout.getVisibility() == View.VISIBLE) {
+                mNoNetworkRetryLayout.setVisibility(View.GONE);
+            }
             Log.v(TAG, "Success : movies data : " + new Gson().toJson(respObj).toString());
             AllMovieResponse response = (AllMovieResponse) respObj;
 
@@ -404,7 +408,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(SAVE_ALL_MOVIES_LIST, mDatasetList);
+        if (mDatasetList != null && !mDatasetList.isEmpty()) {
+            outState.putParcelableArrayList(SAVE_ALL_MOVIES_LIST, mDatasetList);
+        }
         outState.putString(SAVE_MOVIE_FILTER_SORT, mMovieFilterSort);
     }
 

@@ -155,7 +155,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         // If the bound view wasn't previously displayed on screen, it will be animated
         if (position > lastAnimatedItemPosition) {
             //Animation using xml
-            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.translate_left);
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.translate_up);
             viewToAnimate.startAnimation(animation);
             lastAnimatedItemPosition = position;
         }

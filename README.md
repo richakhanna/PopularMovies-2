@@ -14,7 +14,7 @@ In Stage 2 of Popular Movies, additional features has been implemented to enhanc
   The left fragment is for discovering movies. The right fragment displays the movie details view for the currently selected movie.
 
 
-[![Screen Record on youtube](http://img.youtube.com/vi/ZfBGA5Bkv70/0.jpg)](https://www.youtube.com/watch?v=ZfBGA5Bkv70)
+[![Screen Record on youtube](http://img.youtube.com/vi/Vgtzl-KnaPs/0.jpg)](https://www.youtube.com/watch?v=Vgtzl-KnaPs)
 
 
 Tablet UI using Master-Detail Layout
